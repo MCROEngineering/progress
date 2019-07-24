@@ -65,7 +65,7 @@ class Circle extends Component {
     const strokeColorList = Array.isArray(strokeColor) ? strokeColor : [strokeColor];
 
     const stroke =
-      Object.prototype.toString.call(strokeColor) === '[object Object]' ? 'url(#gradient)' : '';
+      Object.prototype.toString.call(strokeColor) === '[object Object]' ? `url(#gradient:${Object.values(strokeColor).join('')})` : '';
 
     let stackPtg = 0;
     return percentList.map((ptg, index) => {
@@ -132,7 +132,7 @@ class Circle extends Component {
       >
         {isGradient && (
           <defs>
-            <linearGradient id="gradient" x1="100%" y1="0%" x2="0%" y2="0%">
+            <linearGradient id={`gradient:${Object.values(strokeColor).join('')}`} x1="100%" y1="0%" x2="0%" y2="0%">
               {Object.keys(strokeColor).map((key, index) => (
                 <stop key={index} offset={key} stopColor={strokeColor[key]} />
               ))}
